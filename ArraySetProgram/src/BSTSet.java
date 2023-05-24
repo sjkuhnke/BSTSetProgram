@@ -26,12 +26,17 @@ public class BSTSet implements Set<String>, Serializable{
 	
 	// Fields
 	private Node root;
+	private int count;
 	
 	public BSTSet() {	}
 	
 	@Override
 	public int size() {
 		return doSize(root);
+	}
+	
+	public int count() {
+		return count;
 	}
 
 	private int doSize(Node n) {
@@ -114,6 +119,7 @@ public class BSTSet implements Set<String>, Serializable{
 	private boolean doAdd(Node n, Node e) {
 		if (n == null) {
 			root = e;
+			doCount();
 			return true;
 		}
 		
@@ -122,6 +128,7 @@ public class BSTSet implements Set<String>, Serializable{
 		if (c < 0) {
 			if (n.left == null) {
 				n.left = e;
+				doCount();
 				return true;
 			} else {
 				return doAdd(n.left, e);
@@ -129,12 +136,24 @@ public class BSTSet implements Set<String>, Serializable{
 		} else if (c > 0) {
 			if (n.right == null) {
 				n.right = e;
+				doCount();
 				return true;
 			} else {
 				return doAdd(n.right, e);
 			}
 		}
 		return true;
+	}
+
+	private void doCount() {
+		count++;
+		if (count % 10 == 0) {
+			if (count != size()) {
+				System.out.println("Count was off\nWas: " + count + "\nExpected: " + size());
+				count = size();
+			}
+		}
+		
 	}
 
 	@Override
@@ -149,6 +168,7 @@ public class BSTSet implements Set<String>, Serializable{
 		
 		Node target = new Node(e);
 		root = doRemove(root, target);
+		count--;
 		return true;
 	}
 	
@@ -205,6 +225,7 @@ public class BSTSet implements Set<String>, Serializable{
 	@Override
 	public void clear() {
 		root = null;
+		count = 0;
 	}
 	
 	public String toString() {
@@ -216,7 +237,7 @@ public class BSTSet implements Set<String>, Serializable{
 	        stringArray[i] = toProperCase(s);
 	    }
 
-	    return String.join(", ", stringArray);
+	    return String.join(",", stringArray);
 	}
 	
 	public String toProperCase(String s) {
@@ -228,7 +249,7 @@ public class BSTSet implements Set<String>, Serializable{
 	    boolean capitalizeNext = true;
 
 	    for (char c : s.toCharArray()) {
-	        if (Character.isWhitespace(c)) {
+	        if (Character.isWhitespace(c) || c == '-') {
 	            capitalizeNext = true;
 	            sb.append(c);
 	        } else {

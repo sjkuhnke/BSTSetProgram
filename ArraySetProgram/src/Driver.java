@@ -39,13 +39,16 @@ public class Driver implements Serializable {
 		JButton remove = new JButton("Remove");
 		JButton print = new JButton("Print");
 		JButton clear = new JButton("Clear");
+		JButton count = new JButton("Count: " + set.count());
 		remove.setBackground(Color.YELLOW);
 		print.setBackground(Color.GREEN);
 		clear.setBackground(Color.RED);
+		count.setBackground(new Color(100, 100, 200));
 		
 		panel.add(tf);
 		panel.add(remove);
 		panel.add(print);
+		panel.add(count);
 		panel.add(clear);
 		
 		tf.addActionListener(new ActionListener() {
@@ -57,6 +60,8 @@ public class Driver implements Serializable {
                 	System.out.println(text + " already in set");
                 }
 				tf.selectAll();
+				count.setText("Count: " + set.count());
+				frame.pack();
 			}
 		});
 		
@@ -68,6 +73,8 @@ public class Driver implements Serializable {
 				} else {
 					System.out.println(text + " not present in set");
 				}
+				count.setText("Count: " + set.count());
+				frame.pack();
 			}
 		});
 		
@@ -84,6 +91,8 @@ public class Driver implements Serializable {
                     set.clear();
                     System.out.println("\nSet cleared.\n");
                 }
+                count.setText("Count: " + set.count());
+                frame.pack();
             }
         });
 		
