@@ -11,7 +11,7 @@ public class BSTSet implements Set<String>, Serializable{
 	private static final long serialVersionUID = 4022434240979354040L;
 
 	// Nested Node class
-	private class Node implements Serializable {
+	class Node implements Serializable {
 		/**
 		 * 
 		 */
@@ -25,7 +25,7 @@ public class BSTSet implements Set<String>, Serializable{
 	}
 	
 	// Fields
-	private Node root;
+	Node root;
 	private int count;
 	
 	public BSTSet() {	}
