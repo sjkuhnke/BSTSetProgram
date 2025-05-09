@@ -22,7 +22,7 @@ public class Driver implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6651871957967502739L;
-	private static final String FILE_PATH = "set.dat";
+	private static final String FILE_PATH = "test.dat";
 	private BSTSet set;
 	
 	public static void main(String[] args) {

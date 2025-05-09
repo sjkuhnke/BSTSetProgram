@@ -197,9 +197,9 @@ public class BSTSet implements Set<String>, Serializable{
 	}
 	
 	private Node findPre(Node n) {
-		if (n == null) return n;
+		if (n.right == null) return n;
 		
-		return findPre(n.right);
+	    return findPre(n.right);
 	}
 
 	@Override
